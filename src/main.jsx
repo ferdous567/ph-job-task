@@ -10,6 +10,7 @@ import Layout from './layout/Layout';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './Login/Login';
 import Register from './Register/Register';
+import AutProvider from './Provider/AutProvider';
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AutProvider>
     <div className='max-w-screen-xl mx-auto'>
       <RouterProvider router={router} />
     </div>
+    </AutProvider>
   </React.StrictMode>,
 )

@@ -1,15 +1,41 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AutProvider";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
+
+    const { signInWithEmail } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
 
-      const onSubmit = (data) => console.log(data);
+      const onSubmit = (data) => {
+        console.log(data)
+        signInWithEmail(data.email, data.password)
+        .then(result => {
+            console.log(result.user);
+            Swal.fire({
+                title: "Good job!",
+                text: "Youre successfully Logged In!",
+                icon: "success"
+            });
+            navigate(from, { replace: true });
+        })
+
+        .catch(err => {
+            console.error(err)
+        })
+    };
 
     return (
         <div>
@@ -39,7 +65,8 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn bg-gradient-to-r from-blue-500  to-violet-500">Login</button>
+                                <input className="btn bg-gradient-to-r from-blue-500  to-violet-500" type="submit" value="Login" />
+                                
                                 <h2>No any account? Please go to <Link className="text-blue-500 hover:underline " to = '/register'>Register</Link></h2>
                             </div>
                         </form>
