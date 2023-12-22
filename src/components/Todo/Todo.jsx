@@ -29,7 +29,7 @@ const Todo = () => {
        setOngoing((ongoing) => [...ongoing, taskList[0]])
     }
 
-    const url = `http://localhost:5000/tasks?email=${user.email}`;
+    const url = `https://task-mgmt-server.vercel.app/tasks?email=${user.email}`;
 
     useEffect(() => {
         fetch(url)
@@ -51,7 +51,7 @@ const Todo = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/tasks/${id}`)
+                axios.delete(`https://task-mgmt-server.vercel.app/tasks/${id}`)
                     .then(res => {
                         console.log(res.data);
                         if (res.data.deletedCount > 0) {

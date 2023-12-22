@@ -23,7 +23,7 @@ const CreateTask = () => {
             deadline: data.deadlines
         }
         console.log(taskItem);
-        axios.post('http://localhost:5000/tasks', taskItem)
+        axios.post('https://task-mgmt-server.vercel.app/tasks', taskItem)
         .then(res =>{
             console.log(res.data)
             if(res.data.insertedId){

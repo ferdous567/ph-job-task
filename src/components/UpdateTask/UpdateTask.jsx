@@ -22,7 +22,7 @@ const UpdateTask = () => {
 
         const updatedTask = { title, desc, priority, deadline }
         console.log(updatedTask);
-        axios.put(`http://localhost:5000/tasks/${_id}`, updatedTask)
+        axios.put(`https://task-mgmt-server.vercel.app/tasks/${_id}`, updatedTask)
             .then(res => {
                 console.log(res.data)
                 if (res.data.modifiedCount > 0) {

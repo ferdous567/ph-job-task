@@ -49,7 +49,7 @@ const router = createBrowserRouter([
           {
             path: 'updateTask/:id',
             element: <UpdateTask></UpdateTask>,
-            loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`)
+            loader: ({ params }) => fetch(`https://task-mgmt-server.vercel.app/tasks/${params.id}`)
           }
 
         ]
@@ -77,6 +77,8 @@ const router = createBrowserRouter([
     element: <Register></Register>
   }
 ]);
+
+// https://task-mgmt-server.vercel.app/
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

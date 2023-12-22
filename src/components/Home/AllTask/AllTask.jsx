@@ -7,7 +7,7 @@ const AllTask = () => {
     
 
     useEffect(() => {
-        fetch('http://localhost:5000/tasks')
+        fetch('https://task-mgmt-server.vercel.app/tasks')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

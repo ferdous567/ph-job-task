@@ -8,7 +8,7 @@ const Profile = () => {
 
     const [tasks, setTasks] = useState([]);
 
-    const url = `http://localhost:5000/tasks?email=${user.email}`;
+    const url = `https://task-mgmt-server.vercel.app/tasks?email=${user.email}`;
 
     useEffect(() => {
         fetch(url)
