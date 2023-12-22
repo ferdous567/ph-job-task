@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
     return (
         <div>
-            <div className="hero h-[450px] " style={{backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF_5np_NkCRsMqsYtU3pDS7nirye9qQyz93w&usqp=CAU)'}}>
+            <div className="hero h-full md:h-[450px] " style={{backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF_5np_NkCRsMqsYtU3pDS7nirye9qQyz93w&usqp=CAU)'}}>
                 <div className="hero-content flex-col  lg:flex-row-reverse ">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRtPmixKcnbEMspnbI4lXeFskHtEs5r-vy8Q&usqp=CAU" className=" rounded-lg shadow-2xl h-[300px] w-full pl-20" />
                     <div>

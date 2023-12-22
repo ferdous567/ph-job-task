@@ -82,8 +82,8 @@ const Todo = () => {
             <div>
             
                 <h3 className="text-3xl mb-4 font-bold underline text-center">My All Task List</h3>
-                <div className="flex justify-around w-full px-4">
-                    <div className="border w-1/3  p-4">
+                <div className="md:flex justify-around w-full px-4">
+                    <div className="border md:w-1/3  p-4">
                         <h2 className="font-bold">Todo: {tasks.length}</h2>
                         {
                             tasks.map(task => <SingleTask key={task._id} task={task}
@@ -93,14 +93,14 @@ const Todo = () => {
 
                         </div>
                     </div>
-                    <div className="ongoing border w-1/3 font-bold p-4" ref={drop} >
+                    <div className="ongoing border md:w-1/3 font-bold p-4" ref={drop} >
                         <h2 className="font-bold">Ongoing</h2>
                         {
                             ongoing?.map((task, index) => <SingleTask key={index} task={task}
                                 handleDelete={handleDelete}></SingleTask>)
                         }
                     </div>
-                    <div className="border w-1/3 font-bold p-4" >
+                    <div className="border md:w-1/3 font-bold p-4" >
                         <h2 className="font-bold">Complete</h2>
 
                     </div>
