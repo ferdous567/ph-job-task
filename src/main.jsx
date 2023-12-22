@@ -18,6 +18,7 @@ import Todo from './components/Todo/Todo';
 import CreateTask from './components/CreateTask/CreateTask';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import PrivateRoute from './Route/PrivateRoute';
+import UpdateTask from './components/UpdateTask/UpdateTask';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
           {
             path: 'createTask',
             element: <CreateTask></CreateTask>
+          },
+          {
+            path: 'updateTask/:id',
+            element: <UpdateTask></UpdateTask>,
+            loader: ({params}) => fetch(`http://localhost:5000/tasks/${params.id}`)
           }
 
         ]

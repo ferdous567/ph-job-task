@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     return (
@@ -9,7 +10,9 @@ const Banner = () => {
                         <h1 className="text-7xl pr-20 font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-pink-600 to-violet-500">Welcome!</h1>
                         <p className="py-6 text-white font-normal text-lg"> Explore task create, see, update and get task to our website. <br />
                             Please visit us and more explore to get service.</p>
+                        <Link to = '/dashboard'>
                         <button className="btn text-white bg-gradient-to-r from-violet-500 to-fuchsia-500">Explore More..</button>
+                        </Link>
                     </div>
                 </div>
             </div>
