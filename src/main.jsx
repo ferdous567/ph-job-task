@@ -19,6 +19,8 @@ import CreateTask from './components/CreateTask/CreateTask';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import PrivateRoute from './Route/PrivateRoute';
 import UpdateTask from './components/UpdateTask/UpdateTask';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <Dashboard></Dashboard>
         </PrivateRoute>,
-        children:[
+        children: [
           {
             index: true,
             element: <Todo></Todo>
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
           {
             path: 'updateTask/:id',
             element: <UpdateTask></UpdateTask>,
-            loader: ({params}) => fetch(`http://localhost:5000/tasks/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`)
           }
 
         ]
@@ -79,9 +81,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AutProvider>
-    <div className='max-w-screen-xl mx-auto'>
-      <RouterProvider router={router} />
-    </div>
+      <DndProvider backend={HTML5Backend}>
+        <div className='max-w-screen-xl mx-auto'>
+          <RouterProvider router={router} />
+        </div>
+      </DndProvider>
     </AutProvider>
   </React.StrictMode>,
 )

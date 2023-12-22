@@ -2,12 +2,32 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AutProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import SingleTask from "./SingleTask";
+import {   useDrop } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
+// import { DragDropContext } from "react-beautiful-dnd";
 
 const Todo = () => {
 
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
+
+    const [ongoing, setOngoing] = useState([]);
+
+    const [{ isOver }, drop] = useDrop(() => ({
+        accept: "task",
+        drop: (item) => addTaskToOngoing(item._id),
+        collect: (monitor) =>({
+            isOver: !!monitor.isOver(),
+        })
+    }));
+
+    const addTaskToOngoing = _id =>{
+        console.log(_id);
+       const taskList = tasks.filter(onTask => _id === onTask._id);
+       setOngoing((ongoing) => [...ongoing, taskList[0]])
+    }
 
     const url = `http://localhost:5000/tasks?email=${user.email}`;
 
@@ -44,7 +64,7 @@ const Todo = () => {
                             setTasks(remaining);
                         }
 
-                        
+
 
                     });
             }
@@ -55,38 +75,42 @@ const Todo = () => {
 
     }
 
+    
+
     return (
-        <div>
-            <h3 className="text-3xl mb-4 font-bold underline text-center">My All Task List</h3>
-            <div className="flex justify-around w-full px-4">
-                <div className="border w-1/3  p-4">
-                    <h2 className="font-bold">Todo: {tasks.length}</h2>
-                    {
-                        tasks.map(item => <div className="p-4 border shadow-md" key={item._id}>
-                            <h2 className=" font-bold">{item.title} ({item.priority})</h2>
-                            <p className="text-justify">{item.desc}</p>
-                            <p>  <span className="font-bold">Deadline:</span> {item.deadline} days.</p>
-                            <div className="flex justify-end gap-2">
-                                <button onClick={() => handleDelete(item._id)}
-                                    className="btn btn-secondary btn-outline btn-sm">Delete</button>
-                                <Link to = {`/dashboard/updateTask/${item._id}`}>
-                                <button className="btn btn-info btn-outline btn-sm">Edit</button></Link>
-                            </div>
-                        </div>)
-                    }
-                    <div>
+        
+            <div>
+            
+                <h3 className="text-3xl mb-4 font-bold underline text-center">My All Task List</h3>
+                <div className="flex justify-around w-full px-4">
+                    <div className="border w-1/3  p-4">
+                        <h2 className="font-bold">Todo: {tasks.length}</h2>
+                        {
+                            tasks.map(task => <SingleTask key={task._id} task={task}
+                                handleDelete={handleDelete}></SingleTask>)
+                        }
+                        <div>
+
+                        </div>
+                    </div>
+                    <div className="ongoing border w-1/3 font-bold p-4" ref={drop} >
+                        <h2 className="font-bold">Ongoing</h2>
+                        {
+                            ongoing?.map((task, index) => <SingleTask key={index} task={task}
+                                handleDelete={handleDelete}></SingleTask>)
+                        }
+                    </div>
+                    <div className="border w-1/3 font-bold p-4" >
+                        <h2 className="font-bold">Complete</h2>
 
                     </div>
-                </div>
-                <div className="border w-1/3 font-bold p-4">
-                    <h2 className="font-bold">Ongoing</h2>
-                </div>
-                <div className="border w-1/3 font-bold p-4">
-                    <h2 className="font-bold">Complete</h2></div>
 
+                </div>
             </div>
-        </div>
+        
     );
 };
+
+
 
 export default Todo;
